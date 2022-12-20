@@ -59,6 +59,12 @@ def image_resize(image, width=None, height=None, inter = cv2.INTER_AREA):
     return resized
 # ----------------------------
 
+# Environment variables:
+
+DEMO_IMAGE = 'bananas.jpeg'
+
+# ----------------------------
+
 # Interface:
 
 st.set_page_config(page_title='Project- Guy Donagi', layout = 'wide')
@@ -82,7 +88,14 @@ with input:
     k = sel_col.slider('Please choose number of clusters:', value=3, min_value=2, max_value=10)
     attempts = sel_col.slider('Please choose number of attempts:', value=7, min_value=1, max_value=10)
     
-    disp_col.subheader("ayo:")
+    if img_file is not None:
+        image = io.imread(img_file)
+    else:
+        image = io.imread(DEMO_IMAGE)
+    
+    disp_col.subheader("Your Image:")
+    
+    disp_col.image(image)
     
 with output:
     st.header("Calculated Area:")
