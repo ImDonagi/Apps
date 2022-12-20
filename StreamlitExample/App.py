@@ -109,4 +109,4 @@ with segmented:
     
     area_col.subheader('Select The Desired Object:')
     area_col.text(centers)
-    #obj = area_col.selectbox("Now that you have successfully segmented your image into the different object it holds, select the one whose area you want to calculate:", options=[])
+    obj = area_col.selectbox("Now that you have successfully segmented your image into the different object it holds, select the one whose area you want to calculate:", options=centers)
