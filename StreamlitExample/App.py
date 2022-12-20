@@ -109,5 +109,5 @@ with segmented:
     
     area_col.subheader('Select The Desired Object:')
     area_col.text(centers)
-    area_col.color_picker("Now that you have successfully segmented your image into the different objects it holds,\nselect the one whose area you want to calculate.\nEvery option in the select box is actually an RGB color that represents a segment in the\nimage.\nIn order to understand which color is which:", "#ffffff")
+    color = area_col.color_picker("Now that you have successfully segmented your image into the different objects it holds,\nselect the one whose area you want to calculate.\nEvery option in the select box is actually an RGB color that represents a segment in the\nimage.\nIn order to understand which color is which:", "#ffffff")
     obj = area_col.selectbox("Select your color:", options=centers)
