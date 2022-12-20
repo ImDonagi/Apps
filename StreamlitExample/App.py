@@ -61,7 +61,7 @@ def image_resize(image, width=None, height=None, inter = cv2.INTER_AREA):
 
 # Environment variables:
 
-DEMO_IMAGE = './bananas.jpeg'
+DEMO_IMAGE = 'StreamlitExample/bananas.jpeg'
 
 # ----------------------------
 
