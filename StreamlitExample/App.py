@@ -38,6 +38,9 @@ def segment_image_kmeans(img, k=3, attempts=10):
 
 # Interface:
 
+st.set_page_config(page_title='Project- Guy Donagi', layout = 'wide')
+
+
 header = st.container()
 input = st.container()
 output = st.container()
