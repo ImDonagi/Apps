@@ -35,7 +35,7 @@ def segment_image_kmeans(img, k=3, attempts=10):
     # reshape back to the original image dimension
     segmented_image = segmented_image.reshape(img.shape)
     
-    return segmented_image
+    return segmented_image, centers
 
 # Take an image, and return a resized version that fits our page
 def image_resize(image, width=None, height=None, inter = cv2.INTER_AREA):
@@ -102,10 +102,11 @@ with segmented:
     
     img_col, area_col = st.columns(2)
     
-    segmented_image = segment_image_kmeans(image, k=k, attempts=attempts)
+    segmented_image, centers = segment_image_kmeans(image, k=k, attempts=attempts)
     
     img_col.subheader('Segmented Image:')
     img_col.image(segmented_image, use_column_width=True)
     
     area_col.subheader('Select The Desired Object:')
-    obj = area_col.selectbox("Now that you have successfully segmented your image into the different object it holds, select the one whose area you want to calculate:")
+    print(centers)
+    #obj = area_col.selectbox("Now that you have successfully segmented your image into the different object it holds, select the one whose area you want to calculate:", options=[])
