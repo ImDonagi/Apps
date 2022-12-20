@@ -78,7 +78,7 @@ with input:
     sel_col, disp_col = st.columns(2)
     
     sel_col.subheader("Input Values:")
-    img_file = st.sidebar.file_uploader("Please upload an image", type=['jpg', 'jpeg', 'png'])
+    img_file = sel_col.file_uploader("Please upload an image", type=['jpg', 'jpeg', 'png'])
     k = sel_col.slider('Please choose number of clusters:', value=3, min_value=2, max_value=10)
     attempts = sel_col.slider('Please choose number of attempts:', value=7, min_value=1, max_value=10)
     
