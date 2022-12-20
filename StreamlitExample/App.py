@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 # ----------------------------
 
 # Functions:
+
+# Segmenting an image using k-means
 def segment_image_kmeans(img, k=3, attempts=10): 
 
     # Convert MxNx3 image into Kx3 where K=MxN
@@ -34,6 +36,27 @@ def segment_image_kmeans(img, k=3, attempts=10):
     segmented_image = segmented_image.reshape(img.shape)
     
     return segmented_image
+
+# Take an image, and return a resized version that fits our page
+def image_resize(image, width=None, height=None, inter = cv2.INTER_AREA):
+    dim = None
+    (h,w) = image.shape[:2]
+    
+    if width is None and height is None:
+        return image
+    
+    if width is None:
+        r = width/float(w)
+        dim = (int(w*r),height)
+    
+    else:
+        r = width/float(w)
+        dim = (width, int(h*r))
+        
+    # resize the image
+    resized = cv2.resize(image, dim, interpolation=inter)
+    
+    return resized
 # ----------------------------
 
 # Interface:
