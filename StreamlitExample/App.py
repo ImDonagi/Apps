@@ -111,4 +111,4 @@ with segmented:
     area_col.text(centers)
     area_col.text("Now that you have successfully segmented your image into the different objects it holds,\nselect the one whose area you want to calculate.\nEvery option in the select box below is actually an RGB color that represents a segment in the\nimage.\nIn order to understand which color is which:")
     area_col.write("[Use this link](https://www.rapidtables.com/web/color/RGB_Color.html)")
-    obj = area_col.selectbox("Select your color:", options=centers)
+    des_obj = area_col.selectbox("Select your color:", options=centers)
