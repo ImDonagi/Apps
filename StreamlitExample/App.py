@@ -77,8 +77,7 @@ with header:
 with input:
     st.header("Input Values:")
 
-    sel_col = st.container()
-    disp_col = st.container()
+    sel_col, disp_col = st.columns(2)
     
     k = sel_col.slider('Please choose number of clusters:', value=3, min_value=2, max_value=10)
     attempts = sel_col.slider('Please choose number of attempts:', value=7, min_value=1, max_value=10)
