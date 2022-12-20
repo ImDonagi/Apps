@@ -85,7 +85,7 @@ with input:
     
     sel_col.subheader("Input Values:")
     img_file = sel_col.file_uploader("Please upload an image", type=['jpg', 'jpeg', 'png'])
-    k = sel_col.slider('Please choose number of clusters:', value=3, min_value=2, max_value=10)
+    k = sel_col.slider('Please choose number of clusters:', value=4, min_value=2, max_value=10)
     attempts = sel_col.slider('Please choose number of attempts:', value=7, min_value=1, max_value=10)
     
     if img_file is not None:
