@@ -100,7 +100,11 @@ with input:
 with output:
     st.header("Output:")
     
+    img_col, area_col = st.columns(2)
+    
     segmented_image = segment_image_kmeans(image, k=k, attempts=attempts)
     
-    st.subheader('Output Image')
-    st.image(segmented_image, use_column_width=True)
+    img_col.subheader('Segmented Image:')
+    img_col.image(segmented_image, use_column_width=True)
+    
+    area_col.subheader('Calculated Area:')
