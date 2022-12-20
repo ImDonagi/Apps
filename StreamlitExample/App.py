@@ -78,7 +78,7 @@ with header:
     st.title("Area Calculating Using AruCo Markers")
     st.text("This small project was built as a part of \"Intro To Image Processing\" course in the Faculty of Agriculture.\nIt's quite simple:\n")
     st.text("*  Upload an image containing an object and an AruCo marker to the \"Input Image\" section.")
-    st.text("*  The area of the object will be presented in the \"Calculated Area\" section.")
+    st.text("*  The area of the object will be presented in the \"Output\" section.")
 
 with input:
     sel_col, disp_col = st.columns(2)
@@ -98,4 +98,9 @@ with input:
     disp_col.image(image)
     
 with output:
-    st.header("Calculated Area:")
+    st.header("Output:")
+    
+    segmented_image = segment_image_kmeans(image, k=k, attempts=attempts)
+    
+    st.subheader('Output Image')
+    st.image(segmented_image, use_column_width=True)
