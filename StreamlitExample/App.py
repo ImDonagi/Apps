@@ -72,7 +72,7 @@ st.set_page_config(page_title='Project- Guy Donagi', layout = 'wide')
 
 header = st.container()
 input = st.container()
-output = st.container()
+segmented = st.container()
 
 with header:
     st.title("Area Calculating Using AruCo Markers")
@@ -97,8 +97,8 @@ with input:
     
     disp_col.image(image)
     
-with output:
-    st.header("Output:")
+with segmented:
+    st.header("We're Getting There...")
     
     img_col, area_col = st.columns(2)
     
@@ -107,4 +107,5 @@ with output:
     img_col.subheader('Segmented Image:')
     img_col.image(segmented_image, use_column_width=True)
     
-    area_col.subheader('Calculated Area:')
+    area_col.subheader('Select The Desired Object:')
+    obj = area_col.selectbox("Now that you have successfully segmented your image into the different object it holds, select the one whose area you want to calculate:")
