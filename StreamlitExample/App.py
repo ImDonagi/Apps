@@ -82,5 +82,7 @@ with input:
     
     k = sel_col.slider('Please choose number of clusters:', value=3, min_value=2, max_value=10)
     attempts = sel_col.slider('Please choose number of attempts:', value=7, min_value=1, max_value=10)
+    
+    disp_col = st.subheader("ayo")
 with output:
     st.header("Calculated Area:")
