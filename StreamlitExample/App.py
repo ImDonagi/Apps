@@ -3,6 +3,7 @@ import streamlit as st
 import cv2
 import numpy as np
 import skimage.io as io
+from skimage import measure, io, img_as_ubyte, morphology, util, color
 import matplotlib.pyplot as plt
 
 # ----------------------------
@@ -57,6 +58,19 @@ def image_resize(image, width=None, height=None, inter = cv2.INTER_AREA):
     resized = cv2.resize(image, dim, interpolation=inter)
     
     return resized
+
+def calcAreaAruco():
+    parameters = cv2.aruco.DetectorParameters_create()
+    aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_5X5_50)
+    
+    corners, _, _ = cv2.aruco.detectMarkers(image, aruco_dict, parameters=parameters)
+    
+    int_corners = np.int0(corners)
+    cv2.polylines(image, int_corners, True, (0, 255, 0), 10)
+
+    aruco_area = cv2.contourArea (corners[0])
+    pixel_cm_ratio = 5*5 / aruco_area
+    
 # ----------------------------
 
 # Environment variables:
@@ -67,15 +81,14 @@ DEMO_IMAGE = 'StreamlitExample/bananas.jpeg'
 
 # Interface:
 
-st.set_page_config(page_title='Project- Guy Donagi', layout = 'wide')
-
+st.set_page_config(page_title='AruCo Project- Guy Donagi', layout = 'wide')
 
 header = st.container()
 input = st.container()
 segmented = st.container()
 
 with header:
-    st.title("Area Calculating Using AruCo Markers")
+    st.title("Area Calculating Using 5x5 AruCo Markers")
     st.text("This small project was built as a part of \"Intro To Image Processing\" course in the Faculty of Agriculture.\nIt's quite simple:\n")
     st.text("*  Upload an image containing an object and an AruCo marker to the \"Input Image\" section.")
     st.text("*  The area of the object will be presented in the \"Output\" section.")
@@ -90,8 +103,10 @@ with input:
     
     if img_file is not None:
         image = io.imread(img_file)
+        grayscale = img_as_ubyte(rgb2gray(io.imread(image)))
     else:
         image = io.imread(DEMO_IMAGE)
+        grayscale = img_as_ubyte(rgb2gray(io.imread(DEMO_IMAGE)))
     
     disp_col.subheader("Your Image:")
     
