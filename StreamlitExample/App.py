@@ -69,7 +69,7 @@ def calcAreaAruco(image, objIndex, k):
     int_corners = np.int0(corners)
     cv2.polylines(image, int_corners, True, (0, 255, 0), 10)
 
-    aruco_area = cv2.contourArea (corners[0])
+    aruco_area = cv2.contourArea(corners[0])
     pixel_cm_ratio = 5*5 / aruco_area
     
     img = image.copy()
