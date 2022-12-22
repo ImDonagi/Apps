@@ -59,7 +59,7 @@ def image_resize(image, width=None, height=None, inter = cv2.INTER_AREA):
     
     return resized
 
-def calcAreaAruco():
+def calcAreaAruco(image, objIndex, k):
     parameters = cv2.aruco.DetectorParameters_create()
     aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_5X5_50)
     
@@ -70,6 +70,28 @@ def calcAreaAruco():
 
     aruco_area = cv2.contourArea (corners[0])
     pixel_cm_ratio = 5*5 / aruco_area
+    
+    img = image.copy()
+    masked_image = img.copy()
+    
+    masked_image = masked_image.reshape((-1, 3))
+    
+    list_of_cluster_numbers_to_exclude = list(range(k))
+    list_of_cluster_numbers_to_exclude.remove(objindex)
+    
+    for cluster in list_of_cluster_numbers_to_exclude:
+        masked_image[labels== cluster] = [0, 0, 0]
+        
+    masked_image = masked_image.reshape(img.shape)
+    masked_image_grayscale = rgb2gray(masked_image)
+    
+    pixel_count = np.sum(np.array(masked_image_grayscale) >0)
+    bg_count = np.sum(np.array(masked_image_grayscale) ==0)
+    
+    area_cm = leaf_count * pixel_cm_ratio
+    area_m = 0.0001 * leaf_count * pixel_cm_ratio:.3f
+    
+    return masked_image_grayscale>0.1, area_cm, area_m
     
 # ----------------------------
 
@@ -127,3 +149,9 @@ with segmented:
     area_col.text("Now that you have successfully segmented your image into the different objects it holds,\nselect the one whose area you want to calculate.\nEvery option in the select box below is actually an RGB color that represents a segment in the\nimage.\nIn order to understand which color is which:")
     area_col.write("[Use this link](https://www.rapidtables.com/web/color/RGB_Color.html)")
     des_obj = area_col.selectbox("Select your color:", options=centers)
+    
+    for i,center in enumerate(centers):
+        if np.all(center == (des_obj)):
+            center_index = i
+            
+    masked, areaCM, areaM = calcAreaAruco(segmented_image, center_index, k)
