@@ -89,7 +89,7 @@ def calcAreaAruco(image, objIndex, k):
     bg_count = np.sum(np.array(masked_image_grayscale) ==0)
     
     area_cm = leaf_count * pixel_cm_ratio
-    area_m = 0.0001 * leaf_count * pixel_cm_ratio:.3f
+    area_m = 0.0001 * leaf_count * pixel_cm_ratio
     
     return masked_image_grayscale>0.1, area_cm, area_m
     
