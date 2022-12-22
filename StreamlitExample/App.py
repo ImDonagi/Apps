@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import skimage.io as io
 from skimage import measure, io, img_as_ubyte, morphology, util, color
+from skimage.color import label2rgb, rgb2gray
 import matplotlib.pyplot as plt
 
 # ----------------------------
